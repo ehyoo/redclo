@@ -2,6 +2,13 @@ require 'bcrypt'
 
 class User < ActiveRecord::Base
   include BCrypt
+  validates :username, presence: true
+  validates :username, uniqueness: true
+  validates :username, length: { minimum: 2 }
+  validates :password_hash, presence: true
+
+  has_many :users_subderrits, dependent: :destroy
+  has_many :subderrits, through: :users_subderrits
 
   def password
     @password ||= Password.new(password_hash)

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428032629) do
+ActiveRecord::Schema.define(version: 20160428084428) do
+
+  create_table "subderrits", force: :cascade do |t|
+    t.string   "name"
+    t.text     "moderators"
+    t.text     "blacklist"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
@@ -19,5 +27,15 @@ ActiveRecord::Schema.define(version: 20160428032629) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  create_table "users_subderrits", force: :cascade do |t|
+    t.integer  "subderrit_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "users_subderrits", ["subderrit_id"], name: "index_users_subderrits_on_subderrit_id"
+  add_index "users_subderrits", ["user_id"], name: "index_users_subderrits_on_user_id"
 
 end

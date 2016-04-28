@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+  resources :subderrits
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # TODO: Change this later
-  root 'users#index'
+  root 'subderrits#index'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
