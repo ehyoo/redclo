@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    binding.pry
     @user.password = user_params[:password]
 
     respond_to do |format|
