@@ -13,10 +13,7 @@
   <tbody>
     <% @subderrits.each do |subderrit| %>
       <tr>
-        <td><%= subderrit.name %></td>
-        <td><%= link_to 'Show', subderrit %></td>
-        <td><%= link_to 'Edit', edit_subderrit_path(subderrit) %></td>
-        <td><%= link_to 'Destroy', subderrit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "#{subderrit.name}", subderrit %></td>
       </tr>
     <% end %>
   </tbody>

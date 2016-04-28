@@ -19,7 +19,7 @@ class SubderritsController < ApplicationController
 
   # GET /subderrits/1/edit
   # Maybe later
-  
+
   # def edit
   # end
 
@@ -28,7 +28,7 @@ class SubderritsController < ApplicationController
   def create
     user = current_user
     @subderrit = user.subderrits.create(subderrit_params)
-    @subderrit.moderators << current_user
+    @subderrit.moderators << current_user.username
     respond_to do |format|
       if @subderrit.save
 

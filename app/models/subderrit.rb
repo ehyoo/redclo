@@ -6,6 +6,7 @@ class Subderrit < ActiveRecord::Base
 
   has_many :users_subderrits, dependent: :destroy
   has_many :users, through: :users_subderrits
+  has_many :posts, dependent: :destroy
   serialize :moderators, Array
   serialize :blacklist, Array
 end

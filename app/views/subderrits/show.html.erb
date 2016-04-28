@@ -5,5 +5,22 @@
   <%= @subderrit.name %>
 </p>
 
-<%= link_to 'Edit', edit_subderrit_path(@subderrit) %> |
+Moderators:
+
+<% @subderrit.moderators.each do |mod|%>
+<p>
+<%=mod%>
+</p>
+<%end%>
+
+<% @subderrit.posts.each do |post|%>
+<p>
+<%=post.title%></br>
+<%=post.body%></br>
+</p>
+<%end%>
+
+
+<%= link_to 'Destroy', @subderrit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <%= link_to 'Back', subderrits_path %>
+<%= link_to 'Make Post', "/subderrits/#{@subderrit.id}/posts/new" %>

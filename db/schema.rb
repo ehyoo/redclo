@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428084428) do
+ActiveRecord::Schema.define(version: 20160428102343) do
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "subderrit_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "posts", ["subderrit_id"], name: "index_posts_on_subderrit_id"
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "subderrits", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +32,16 @@ ActiveRecord::Schema.define(version: 20160428084428) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "upvotes", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "upvotes", ["post_id"], name: "index_upvotes_on_post_id"
+  add_index "upvotes", ["user_id"], name: "index_upvotes_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
