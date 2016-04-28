@@ -19,9 +19,9 @@
     <%= f.label :body %><br>
     <%= f.text_area :body %>
   </div>
-  <% f.text_field :title%>
+  <%= f.hidden_field :subderrit_id, :value => params[:subderrit_id] %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
-  
 <% end %>
