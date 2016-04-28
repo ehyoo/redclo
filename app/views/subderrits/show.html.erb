@@ -17,6 +17,8 @@ Moderators:
 <p>
 <%=post.title%></br>
 <%=post.body%></br>
+<%= button_to 'Upvote', subderrit_post_upvote_path(subderrit_id: params[:id], post_id: post.id)%>
+<%= button_to 'Downvote', subderrit_post_downvote_path(subderrit_id: params[:id], post_id: post.id)%>
 </p>
 <%end%>
 

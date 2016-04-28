@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :posts
   resources :subderrits do
-    resources :posts
+    resources :posts do
+      post '/upvote' => 'posts#upvote'
+      post '/downvote' => 'posts#downvote'
+    end
+    
   end
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.

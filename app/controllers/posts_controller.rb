@@ -62,6 +62,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def upvote
+    @post = Post.find(params[:post_id])
+    redirect_to @post
+  end
+
+  def downvote
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
