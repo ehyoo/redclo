@@ -1,3 +1,4 @@
+# Subderrits Controller
 class SubderritsController < ApplicationController
   before_action :set_subderrit, only: [:show, :edit, :update, :destroy]
 
@@ -66,13 +67,12 @@ class SubderritsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_subderrit
-      @subderrit = Subderrit.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def subderrit_params
-      params.require(:subderrit).permit(:name)
-    end
+  def set_subderrit
+    @subderrit = Subderrit.find(params[:id])
+  end
+
+  def subderrit_params
+    params.require(:subderrit).permit(:name)
+  end
 end

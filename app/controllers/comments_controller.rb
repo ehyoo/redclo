@@ -1,5 +1,5 @@
+# Comments controller
 class CommentsController < ApplicationController
-
   # GET /comments/1
   def show
   end
@@ -87,13 +87,13 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:body, :post_id, :op_comment_id)
-    end
+    # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:body, :post_id, :op_comment_id)
+  end
 end

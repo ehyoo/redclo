@@ -1,3 +1,4 @@
+# Vote specifically for comments
 class Cvote < ActiveRecord::Base
   validates_uniqueness_of :user_id, scope: :comment_id
   belongs_to :user
@@ -10,12 +11,9 @@ class Cvote < ActiveRecord::Base
     comment = self.comment
     val = 0
     comment.cvotes.each do |vote|
-      val = val + vote.value
+      val += vote.value
     end
     comment.net_votes = val
     comment.save
   end
-
-
-
 end

@@ -1,3 +1,4 @@
+# Post that's in a subderrit
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :subderrit

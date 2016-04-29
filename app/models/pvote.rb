@@ -1,3 +1,4 @@
+# Vote class specifically for posts
 class Pvote < ActiveRecord::Base
   validates_uniqueness_of :user_id, scope: :post_id
   belongs_to :user
@@ -10,7 +11,7 @@ class Pvote < ActiveRecord::Base
     post = self.post
     val = 0
     post.pvotes.each do |vote|
-      val = val + vote.value
+      val += vote.value
     end
     post.net_votes = val
     post.save
