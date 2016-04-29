@@ -1,0 +1,11 @@
+<%= form_tag(subderrit_post_comment_path(@comment, :id => params[:post_id], :post_id => params[:post_id]), method: :put) do %>
+  <div class="field">
+    <%= text_area_tag 'comment[body]', @comment.body %>
+  </div>
+
+  <%= hidden_field_tag 'comment[post_id]', params[:id]%>
+
+  <div class="action">
+    <%= submit_tag 'Edit' %>
+  </div>
+<% end %>

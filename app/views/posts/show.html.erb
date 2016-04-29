@@ -8,9 +8,13 @@
   <%= @post.body %></br>
   By: <%= @post.user.username %></br>
   Upvotes: <%= @post.net_votes %>
+  <% if current_user == @post.user %>
+    </br><%= link_to 'edit', edit_subderrit_post_path %>
+  <% end %>
 </p>
 
 <% @can_delete = @post.subderrit.moderators.include?(current_user.username) %>
+
 
 Make a comment:
 <p>
@@ -27,10 +31,12 @@ Make a comment:
 
   <%= render 'vote_partial', comment: comment%>
   <% if logged_in? %>
-  <%= link_to 'reply', new_subderrit_post_comment_comment_path(:comment_id => comment.id, :post_id => params[:id], :subderrit_id => params[:subderrit_id]) %>
+    </br><%= link_to 'reply', new_subderrit_post_comment_comment_path(:comment_id => comment.id, :post_id => params[:id], :subderrit_id => params[:subderrit_id]) %>
   <% if @can_delete || comment.user == current_user%>
     </br><%= link_to 'delete', subderrit_post_comment_path(:comment_id => comment.id, :post_id => params[:id]), method: :delete %>
-  <%end%>
+    </br><%= link_to 'edit', edit_subderrit_post_comment_path(:post_id => params[:id])%>
+  <%end%>  
+
   <% end %>
   <%comment.replies.order(net_votes: :desc).each do |nc| %>
     <%= render 'comment_partial', margin: 0, comment: nc %>

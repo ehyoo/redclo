@@ -8,6 +8,10 @@ class CommentsController < ApplicationController
   def new
   end
 
+  def edit
+    @comment = Comment.find(params[:id])
+  end
+
   # POST /comments
   def create
     @comment = Comment.new(comment_params)
@@ -27,6 +31,16 @@ class CommentsController < ApplicationController
 
   # PATCH/PUT /comments/1
   def update
+    @comment = Comment.find(params[:id])
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html { redirect_to subderrit_post_path(:subderrit_id => params[:subderrit_id], :id => @comment.id), notice: 'Post was successfully updated.' }
+        format.json { render :show, status: :ok, location: @comment }
+      else
+        format.html { render :edit }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
 
