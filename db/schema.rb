@@ -13,16 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160428180316) do
 
-  create_table "post_votes", force: :cascade do |t|
-    t.integer  "post_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "post_votes", ["post_id"], name: "index_post_votes_on_post_id"
-  add_index "post_votes", ["user_id"], name: "index_post_votes_on_user_id"
-
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -37,9 +27,14 @@ ActiveRecord::Schema.define(version: 20160428180316) do
 
   create_table "pvotes", force: :cascade do |t|
     t.integer  "value"
+    t.integer  "post_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "pvotes", ["post_id"], name: "index_pvotes_on_post_id"
+  add_index "pvotes", ["user_id"], name: "index_pvotes_on_user_id"
 
   create_table "subderrits", force: :cascade do |t|
     t.string   "name"
@@ -48,16 +43,6 @@ ActiveRecord::Schema.define(version: 20160428180316) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "upvotes", force: :cascade do |t|
-    t.integer  "post_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "upvotes", ["post_id"], name: "index_upvotes_on_post_id"
-  add_index "upvotes", ["user_id"], name: "index_upvotes_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "username"

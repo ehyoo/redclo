@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
   # POST '/login'
   def create
     @user = User.find_by(username: params[:user][:username])
-    #binding.pry
     if @user.password == params[:user][:password]
       session[:user_id] = @user.id
       redirect_to @user

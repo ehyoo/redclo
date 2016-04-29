@@ -26,7 +26,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    binding.pry
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -64,11 +63,30 @@ class PostsController < ApplicationController
 
   def upvote
     @post = Post.find(params[:post_id])
+    pvote = Pvote.new
+    pvote.value = 1
+    pvote.post = @post
+    pvote.user = current_user
+    pvote.save
     redirect_to @post
   end
 
   def downvote
+    @post = Post.find(params[:post_id])
+    pvote = Pvote.new
+    pvote.value = -1
+    pvote.post = @post
+    pvote.user = current_user
+    pvote.save
+    redirect_to @post
   end
+
+  def delete_vote
+  end
+
+  def edit_vote
+  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

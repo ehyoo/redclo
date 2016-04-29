@@ -19,6 +19,13 @@ Moderators:
 <%=post.body%></br>
 <%= button_to 'Upvote', subderrit_post_upvote_path(subderrit_id: params[:id], post_id: post.id)%>
 <%= button_to 'Downvote', subderrit_post_downvote_path(subderrit_id: params[:id], post_id: post.id)%>
+<%val = 0%>
+<%post.pvotes.each do |pvote| %>
+<%val = val + pvote.value %>
+<%end%>
+<%= val %>
+
+
 </p>
 <%end%>
 
