@@ -7,6 +7,10 @@ Rails.application.routes.draw do
       put '/vote' => 'posts#edit_vote'
       resources :comments, only: [:show, :create, :update, :destroy] do
         resources :comments, only: [:show, :new, :create, :update, :destroy]
+          post '/upvote' => 'comments#upvote'
+          post '/downvote' => 'comments#downvote'
+          delete '/vote' => 'comments#delete_vote'
+          put '/vote' => 'comments#edit_vote'
       end
 
     end

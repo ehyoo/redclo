@@ -33,6 +33,38 @@ class CommentsController < ApplicationController
   def destroy
   end
 
+  def upvote
+    @comment = Comment.find(params[:comment_id])
+    cvote = Cvote.new
+    cvote.value = 1
+    cvote.comment = @comment
+    cvote.user = current_user
+    cvote.save
+    redirect_to subderrit_post_path(:id => params[:post_id])
+  end
+
+  def downvote
+    @comment = Comment.find(params[:comment_id])
+    cvote = Cvote.new
+    cvote.value = -1
+    cvote.comment = @comment
+    cvote.user = current_user
+    cvote.save
+    redirect_to subderrit_post_path(:id => params[:post_id])
+  end
+
+  def delete_vote
+    Cvote.where(user_id: current_user.id, comment_id: params[:comment_id]).destroy_all
+    redirect_to subderrit_post_path(:id => params[:post_id])
+  end
+
+  def edit_vote
+    cvote = Cvote.where(user_id: current_user.id, comment_id: params[:comment_id]).first
+    cvote.value = cvote.value * -1
+    cvote.save
+    redirect_to subderrit_post_path(:id => params[:post_id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment

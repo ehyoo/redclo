@@ -18,15 +18,20 @@ Make a comment:
 
 <% @post.comments.each do |comment| %>
   <% if comment.op_comment.nil? %>
+  </br> <%= render 'vote_partial', comment: comment%>
+  <%val = 0%>
+<!-- TODO: MAKE THIS SERVERSIDE NOT IN THE VIEWS- THIS IS JUST A TEMPORARY HACK. -->
+  <%comment.cvotes.each do |pvote| %>
+    <%val = val + pvote.value %>
+  <%end%>
+<%= val %>
   </br><%= comment.user.username %>
   </br><%= comment.body %>
-  </br><%= link_to 'comment', new_subderrit_post_comment_comment_path(:comment_id => comment.id, :post_id => params[:id], :subderrit_id => params[:subderrit_id]) %>
+  </br><%= link_to 'reply', new_subderrit_post_comment_comment_path(:comment_id => comment.id, :post_id => params[:id], :subderrit_id => params[:subderrit_id]) %>
   <%comment.replies.each do |nc| %>
     <%= render 'comment_partial', margin: 0, comment: nc %>
   <%end%>
 <%end%>
 
-
-  
 
 <%end%> 
