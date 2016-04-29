@@ -12,14 +12,16 @@
     </br><%= link_to 'edit', edit_subderrit_post_path %>
   <% end %>
 </p>
+<%if logged_in? %>
+  <% @can_delete = @post.subderrit.moderators.include?(current_user.username) %>
 
-<% @can_delete = @post.subderrit.moderators.include?(current_user.username) %>
 
 
-Make a comment:
-<p>
-<%= render 'comment_form' %>
-</p>
+  Make a comment:
+  <p>
+  <%= render 'comment_form' %>
+  </p>
+<% end %>
 
 <% @post.comments.order(net_votes: :desc).each do |comment| %>
   <% if comment.op_comment.nil? %>
