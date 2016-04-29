@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<% is_moderator = @subderrit.moderators.include?(current_user.username)%>
 <p>
   <strong>Name:</strong>
   <%= @subderrit.name %>
@@ -32,12 +33,18 @@ Moderators:
   <% end %>
 <% end %>
 
-<%= post.net_votes %>
+<% if is_moderator || post.user == current_user %>
+  <%= button_to 'Delete Post', "/subderrits/#{params[:id]}/posts/#{post.id}", method: :delete %>
+<% end %>
 
 </p>
 <%end%>
 
 
+<% if is_moderator %>
 <%= link_to 'Destroy', @subderrit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
 <%= link_to 'Back', subderrits_path %>
+<% if logged_in? %>
 <%= link_to 'Make Post', "/subderrits/#{@subderrit.id}/posts/new" %>
+<% end %>

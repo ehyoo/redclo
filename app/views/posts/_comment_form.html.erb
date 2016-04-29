@@ -2,7 +2,7 @@
 
   <div class="field">
     <%= label_tag :body %>
-    <%= text_field_tag 'comment[body]' %>
+    <%= text_area_tag 'comment[body]' %>
   </div>
 
   <%= hidden_field_tag 'comment[post_id]', params[:id]%>

@@ -9,7 +9,7 @@
   <strong>Body:</strong>
   <%= @post.body %>
 </p>
-
+<%@can_delete = @post.subderrit.moderators.include?(current_user.username) || @post.user == current_user %>
 
 Make a comment:
 <p>
@@ -19,10 +19,16 @@ Make a comment:
 <% @post.comments.each do |comment| %>
   <% if comment.op_comment.nil? %>
   </br> <%= render 'vote_partial', comment: comment%>
-  </br><%= comment.net_votes %>
-  </br><%= comment.user.username %>
-  </br><%= comment.body %>
+  
+  </br>username: <%= comment.user.username %>
+  </br>body: <%= comment.body %>
+  </br>upvotes: <%= comment.net_votes %>
+  <% if logged_in? %>
   </br><%= link_to 'reply', new_subderrit_post_comment_comment_path(:comment_id => comment.id, :post_id => params[:id], :subderrit_id => params[:subderrit_id]) %>
+  <% if @can_delete %>
+    </br><%= link_to 'delete', subderrit_post_comment_path(:comment_id => comment.id, :post_id => params[:id]), method: :delete %>
+  <%end%>
+  <% end %>
   <%comment.replies.each do |nc| %>
     <%= render 'comment_partial', margin: 0, comment: nc %>
   <%end%>

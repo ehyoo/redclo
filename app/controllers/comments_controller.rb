@@ -32,6 +32,12 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1
   def destroy
+    comment = Comment.find(params[:comment_id])
+    comment.destroy
+    respond_to do |format|
+      format.html { redirect_to subderrit_post_path(:id => params[:post_id], :subderrit_id => params[:subderrit_id]), notice: 'Post was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   def upvote
