@@ -1,0 +1,25 @@
+<h1>New Comment</h1>
+<% op_comment = Comment.find(params[:comment_id]) %>
+<p>
+Original Comment:
+</br><%= op_comment.body %>
+</p>
+
+<%= form_tag(subderrit_post_comment_comments_path(@comment, :comment_id => params[:comment_id], :post_id => params[:post_id], :subderrit_id => params[:subderrit_id])) do %>
+
+  <div class="field">
+    <%= label_tag :body %>
+    <%= text_field_tag 'comment[body]' %>
+  </div>
+
+  <%= hidden_field_tag 'comment[post_id]', params[:post_id]%>
+  <%= hidden_field_tag 'comment[op_comment_id]', params[:comment_id] %>
+
+  <div class="action">
+    <%= submit_tag %>
+  </div>
+
+
+<% end %>
+
+<%= link_to 'Back', subderrit_posts_path %>
