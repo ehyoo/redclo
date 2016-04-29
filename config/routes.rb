@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-  resources :posts
   resources :subderrits do
     resources :posts do
       post '/upvote' => 'posts#upvote'
       post '/downvote' => 'posts#downvote'
       delete '/vote' => 'posts#delete_vote'
       put '/vote' => 'posts#edit_vote'
+      resources :comments, only: [:show, :create, :update, :destroy]
     end
-    
   end
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.

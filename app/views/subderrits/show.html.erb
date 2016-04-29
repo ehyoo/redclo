@@ -15,8 +15,7 @@ Moderators:
 
 <% @subderrit.posts.each do |post|%>
 <p>
-<%=post.title%></br>
-<%=post.body%></br>
+<%=link_to "#{post.title}", subderrit_post_path(subderrit_id: params[:id], id: post.id)%></br>
 <% vote = Pvote.where(post_id: post.id, user_id: current_user.id).first%>
 <% if post.user_id != current_user.id %>
   <% if vote %>

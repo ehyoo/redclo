@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :users_subderrits, dependent: :destroy
   has_many :subderrits, through: :users_subderrits
   has_many :pvotes
+  has_many :comments
+  has_many :cvotes
 
   def password
     @password ||= Password.new(password_hash)

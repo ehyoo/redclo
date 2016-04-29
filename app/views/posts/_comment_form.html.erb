@@ -1,0 +1,15 @@
+<%= form_tag(subderrit_post_comments_path(@comment, :post_id => params[:id], :subderrit_id => params[:subderrit_id])) do %>
+
+  <div class="field">
+    <%= label_tag :body %>
+    <%= text_field_tag 'comment[body]' %>
+  </div>
+
+  <%= hidden_field_tag 'comment[post_id]', params[:id]%>
+
+  <div class="action">
+    <%= submit_tag %>
+  </div>
+
+
+<% end %>
