@@ -13,19 +13,21 @@ by:
 in:
 <%= link_to post.subderrit.name, subderrit_path(post.subderrit.id) %>
 
-<% vote = Pvote.where(post_id: post.id, user_id: current_user.id).first%>
-<% if post.user_id != current_user.id %>
-  <% if vote %>
-    <% if vote.value == 1 %>
-      <%= button_to 'Upvote', subderrit_post_vote_path(subderrit_id: post.subderrit.id, post_id: post.id), method: :delete%>
-      <%= button_to 'Downvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
-    <% elsif vote.value == -1 %>
-      <%= button_to 'Upvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
-      <%= button_to 'Downvote', subderrit_post_vote_path(subderrit_id: post.subderrit.id, post_id: post.id), method: :delete%>
+<% if logged_in? %>
+  <% vote = Pvote.where(post_id: post.id, user_id: current_user.id).first%>
+  <% if post.user_id != current_user.id %>
+    <% if vote %>
+      <% if vote.value == 1 %>
+        <%= button_to 'Upvote', subderrit_post_vote_path(subderrit_id: post.subderrit.id, post_id: post.id), method: :delete%>
+        <%= button_to 'Downvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
+      <% elsif vote.value == -1 %>
+        <%= button_to 'Upvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
+        <%= button_to 'Downvote', subderrit_post_vote_path(subderrit_id: post.subderrit.id, post_id: post.id), method: :delete%>
+      <% end %>
+    <% else %>
+      <%= button_to 'Upvote', subderrit_post_upvote_path(subderrit_id: post.subderrit.id, post_id: post.id)%>
+      <%= button_to 'Downvote', subderrit_post_downvote_path(subderrit_id: post.subderrit.id, post_id: post.id)%>
     <% end %>
-  <% else %>
-    <%= button_to 'Upvote', subderrit_post_upvote_path(subderrit_id: post.subderrit.id, post_id: post.id)%>
-    <%= button_to 'Downvote', subderrit_post_downvote_path(subderrit_id: post.subderrit.id, post_id: post.id)%>
   <% end %>
 <% end %>
 
