@@ -16,7 +16,7 @@ Make a comment:
 <%= render 'comment_form' %>
 </p>
 
-<% @post.comments.each do |comment| %>
+<% @post.comments.order(net_votes: :desc).each do |comment| %>
   <% if comment.op_comment.nil? %>
   </br> <%= render 'vote_partial', comment: comment%>
   
@@ -29,7 +29,7 @@ Make a comment:
     </br><%= link_to 'delete', subderrit_post_comment_path(:comment_id => comment.id, :post_id => params[:id]), method: :delete %>
   <%end%>
   <% end %>
-  <%comment.replies.each do |nc| %>
+  <%comment.replies.order(net_votes: :desc).each do |nc| %>
     <%= render 'comment_partial', margin: 0, comment: nc %>
   <%end%>
 <%end%>

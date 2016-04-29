@@ -14,8 +14,10 @@ Moderators:
 </p>
 <%end%>
 
-<% @subderrit.posts.each do |post|%>
+<h3>Posts:</h3>
+<% @subderrit.posts.order(net_votes: :desc).each do |post|%>
 <p>
+<%= post.net_votes%>
 <%=link_to "#{post.title}", subderrit_post_path(subderrit_id: params[:id], id: post.id)%></br>
 <% vote = Pvote.where(post_id: post.id, user_id: current_user.id).first%>
 <% if post.user_id != current_user.id %>

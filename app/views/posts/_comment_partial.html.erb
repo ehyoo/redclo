@@ -31,6 +31,6 @@ upvotes: <%= comment.net_votes %></br>
 <%end%>
 
 
-<% comment.replies.each do |reply| %>
+<% comment.replies.order(net_votes: :desc).each do |reply| %>
 <%= render 'comment_partial', margin: margin+1, comment: reply %>
 <%end%>
