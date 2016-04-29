@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
+    @comment.net_votes = 0
     if comment_params[:op_comment_id]
       op_comment = Comment.find(comment_params[:op_comment_id])
       @comment.user = current_user

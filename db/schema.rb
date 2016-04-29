@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160429040244) do
     t.integer  "op_comment_id"
     t.integer  "replies_id"
     t.integer  "comment_id"
+    t.integer  "net_votes"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160429040244) do
     t.text     "body"
     t.integer  "subderrit_id"
     t.integer  "user_id"
+    t.integer  "net_votes"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

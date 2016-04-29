@@ -26,6 +26,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @post.net_votes = 0
     respond_to do |format|
       if @post.save
         format.html { redirect_to subderrit_post_path(:subderrit_id => params[:subderrit_id], :id => @post.id), notice: 'Post was successfully created.' }

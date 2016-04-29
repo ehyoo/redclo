@@ -15,12 +15,7 @@ body: <%=comment.body%></br>
   >
 <%end%>
 <%= render 'vote_partial', comment: comment %>
-  <%val = 0%>
-<!-- TODO: MAKE THIS SERVERSIDE NOT IN THE VIEWS- THIS IS JUST A TEMPORARY HACK. -->
-  <%comment.cvotes.each do |pvote| %>
-    <%val = val + pvote.value %>
-  <%end%>
-<%= val %>
+</br><%= comment.net_votes %>
 <%= link_to 'reply', new_subderrit_post_comment_comment_path(:comment_id => comment.id, :post_id => params[:id], :subderrit_id => params[:subderrit_id]) %>
 
 

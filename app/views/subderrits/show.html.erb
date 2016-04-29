@@ -32,13 +32,7 @@ Moderators:
   <% end %>
 <% end %>
 
-<%val = 0%>
-<!-- TODO: MAKE THIS SERVERSIDE NOT IN THE VIEWS- THIS IS JUST A TEMPORARY HACK. -->
-  <%post.pvotes.each do |pvote| %>
-    <%val = val + pvote.value %>
-  <%end%>
-<%= val %>
-
+<%= post.net_votes %>
 
 </p>
 <%end%>

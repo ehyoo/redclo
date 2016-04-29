@@ -7,6 +7,7 @@ class CreateComments < ActiveRecord::Migration
       t.belongs_to :op_comment, index: true, foreign_key: true
       t.references :replies, index: true, foreign_key: true
       t.integer :comment_id
+      t.integer :net_votes
 
       t.timestamps null: false
     end

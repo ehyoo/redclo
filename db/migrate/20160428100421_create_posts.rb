@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration
       t.text :body
       t.belongs_to :subderrit, index: true
       t.belongs_to :user, index: true
+      t.integer :net_votes
 
       t.timestamps null: false
     end
