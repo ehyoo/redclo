@@ -68,7 +68,7 @@ class PostsController < ApplicationController
     pvote.post = @post
     pvote.user = current_user
     pvote.save
-    redirect_to @post
+    redirect_to Subderrit.find(params[:subderrit_id])
   end
 
   def downvote
@@ -78,15 +78,21 @@ class PostsController < ApplicationController
     pvote.post = @post
     pvote.user = current_user
     pvote.save
-    redirect_to @post
+    redirect_to Subderrit.find(params[:subderrit_id])
   end
 
   def delete_vote
+    Pvote.where(user_id: current_user.id, post_id: params[:post_id]).destroy_all
+    redirect_to Subderrit.find(params[:subderrit_id])
   end
 
   def edit_vote
+    pvote = Pvote.where(user_id: current_user.id, post_id: params[:post_id]).first
+    pvote.value = pvote.value * -1
+    pvote.save
+    redirect_to Subderrit.find(params[:subderrit_id])
   end
-  
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

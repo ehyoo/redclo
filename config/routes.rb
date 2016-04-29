@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resources :posts do
       post '/upvote' => 'posts#upvote'
       post '/downvote' => 'posts#downvote'
+      delete '/vote' => 'posts#delete_vote'
+      put '/vote' => 'posts#edit_vote'
     end
     
   end
