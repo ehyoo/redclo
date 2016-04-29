@@ -1,1 +1,10 @@
-_comment_partial.html.erb
+</br>
+<%(0..margin).each do |i| %>
+>
+<%end%>
+<%=comment.body%>
+</br><%= link_to 'comment', new_subderrit_post_comment_comment_path(:comment_id => comment.id, :post_id => params[:id], :subderrit_id => params[:subderrit_id]) %>
+
+<% comment.replies.each do |reply| %>
+<%= render 'comment_partial', margin: margin+1, comment: reply %>
+<%end%>

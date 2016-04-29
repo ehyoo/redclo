@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  before_action :set_subderrit, only: [:show, :edit, :update, :destroy]
 
   # GET /comments/1
   def show
@@ -33,7 +32,6 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   def destroy
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
