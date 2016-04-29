@@ -1,15 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @post.title %>
+  <h2><%= @post.title %></h2>
 </p>
 
 <p>
-  <strong>Body:</strong>
-  <%= @post.body %>
+  <%= @post.body %></br>
+  By: <%= @post.user.username %></br>
+  Upvotes: <%= @post.net_votes %>
 </p>
-<%@can_delete = @post.subderrit.moderators.include?(current_user.username) || @post.user == current_user %>
+
+<% @can_delete = @post.subderrit.moderators.include?(current_user.username) %>
 
 Make a comment:
 <p>
@@ -18,14 +19,16 @@ Make a comment:
 
 <% @post.comments.order(net_votes: :desc).each do |comment| %>
   <% if comment.op_comment.nil? %>
-  </br> <%= render 'vote_partial', comment: comment%>
   
-  </br>username: <%= comment.user.username %>
-  </br>body: <%= comment.body %>
-  </br>upvotes: <%= comment.net_votes %>
+  
+  </br><strong><%= comment.user.username %></strong>
+  </br><%= comment.body %>
+  </br>Upvotes: <%= comment.net_votes %>
+
+  <%= render 'vote_partial', comment: comment%>
   <% if logged_in? %>
-  </br><%= link_to 'reply', new_subderrit_post_comment_comment_path(:comment_id => comment.id, :post_id => params[:id], :subderrit_id => params[:subderrit_id]) %>
-  <% if @can_delete %>
+  <%= link_to 'reply', new_subderrit_post_comment_comment_path(:comment_id => comment.id, :post_id => params[:id], :subderrit_id => params[:subderrit_id]) %>
+  <% if @can_delete || comment.user == current_user%>
     </br><%= link_to 'delete', subderrit_post_comment_path(:comment_id => comment.id, :post_id => params[:id]), method: :delete %>
   <%end%>
   <% end %>

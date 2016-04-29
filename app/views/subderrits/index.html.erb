@@ -1,16 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Subderrits</h1>
+<h1>Subderrits:</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
   <tbody>
+    <td> <%= link_to "All", "/all" %> </td>
     <% @subderrits.each do |subderrit| %>
       <tr>
         <td><%= link_to "#{subderrit.name}", subderrit %></td>
@@ -22,5 +17,5 @@
 <br>
 
 <% if logged_in? %>
-  <%= link_to 'New Subderrit', new_subderrit_path %>
+  <%= link_to 'Make your own!', new_subderrit_path %>
 <%end%>

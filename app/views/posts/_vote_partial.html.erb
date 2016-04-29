@@ -2,11 +2,11 @@
 <% if comment.user_id != current_user.id %>
   <% if vote %>
     <% if vote.value == 1 %>
-      <%= button_to 'DELETE Upvote', subderrit_post_comment_vote_path(subderrit_id: params[:subderrit_id], post_id: params[:id], comment_id: comment.id), method: :delete%>
-      <%= button_to 'CHANGE TO Downvote', "/subderrits/#{params[:subderrit_id]}/posts/#{params[:id]}/comments/#{comment.id}/vote", method: :put%>
+      <%= button_to 'Upvote', subderrit_post_comment_vote_path(subderrit_id: params[:subderrit_id], post_id: params[:id], comment_id: comment.id), method: :delete%>
+      <%= button_to 'Downvote', "/subderrits/#{params[:subderrit_id]}/posts/#{params[:id]}/comments/#{comment.id}/vote", method: :put%>
     <% elsif vote.value == -1 %>
-      <%= button_to 'CHANGE TO Upvote', "/subderrits/#{params[:subderrit_id]}/posts/#{params[:id]}/comments/#{comment.id}/vote", method: :put%>
-      <%= button_to 'DELETE Downvote', subderrit_post_comment_vote_path(subderrit_id: params[:subderrit_id], post_id: params[:id], comment_id: comment.id), method: :delete%>
+      <%= button_to 'Upvote', "/subderrits/#{params[:subderrit_id]}/posts/#{params[:id]}/comments/#{comment.id}/vote", method: :put%>
+      <%= button_to 'Downvote', subderrit_post_comment_vote_path(subderrit_id: params[:subderrit_id], post_id: params[:id], comment_id: comment.id), method: :delete%>
     <% end %>
   <% else %>
     <%= button_to 'Upvote', subderrit_post_comment_upvote_path(:comment_id => comment.id, :post_id => params[:id])%>

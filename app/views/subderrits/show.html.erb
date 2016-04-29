@@ -2,32 +2,33 @@
 
 <% is_moderator = @subderrit.moderators.include?(current_user.username)%>
 <p>
-  <strong>Name:</strong>
-  <%= @subderrit.name %>
+  <center><h2><%= @subderrit.name %></h2></center>
 </p>
 
-Moderators:
 
+Moderators:</br>
 <% @subderrit.moderators.each do |mod|%>
-<p>
-<%=mod%>
-</p>
+<%=mod%></br>
 <%end%>
+
 
 <h3>Posts:</h3>
 <% @subderrit.posts.order(net_votes: :desc).each do |post|%>
 <p>
+
 <%= post.net_votes%>
-<%=link_to "#{post.title}", subderrit_post_path(subderrit_id: params[:id], id: post.id)%></br>
+<%=link_to "#{post.title}", subderrit_post_path(subderrit_id: params[:id], id: post.id)%>
+by:
+<%= post.user.username %>
 <% vote = Pvote.where(post_id: post.id, user_id: current_user.id).first%>
 <% if post.user_id != current_user.id %>
   <% if vote %>
     <% if vote.value == 1 %>
-      <%= button_to 'DELETE Upvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
-      <%= button_to 'CHANGE TO Downvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
+      <%= button_to 'Upvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
+      <%= button_to 'Downvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
     <% elsif vote.value == -1 %>
-      <%= button_to 'CHANGE TOUpvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
-      <%= button_to 'DELETE Downvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
+      <%= button_to 'Upvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
+      <%= button_to 'Downvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
     <% end %>
   <% else %>
     <%= button_to 'Upvote', subderrit_post_upvote_path(subderrit_id: params[:id], post_id: post.id)%>
@@ -44,9 +45,8 @@ Moderators:
 
 
 <% if is_moderator %>
-<%= link_to 'Destroy', @subderrit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<%= link_to 'Delete Subderrit', @subderrit, method: :delete, data: { confirm: 'Are you sure?' } %></br></td>
 <% end %>
-<%= link_to 'Back', subderrits_path %>
 <% if logged_in? %>
-<%= link_to 'Make Post', "/subderrits/#{@subderrit.id}/posts/new" %>
+<%= link_to 'Make Post', "/subderrits/#{@subderrit.id}/posts/new" %></br>
 <% end %>

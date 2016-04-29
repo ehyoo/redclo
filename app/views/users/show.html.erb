@@ -5,13 +5,21 @@
   <%= @user.username %>
 </p>
 
-<p>
-  <strong>Password hash:</strong>
-  <%= @user.password_hash %>
-</p>
+<% post_vote = 0 %>
+<% post_count = 0%>
+<% comment_vote = 0 %>
+<% comment_count = 0 %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
-<%if current_user %>
-<%= link_to "Log out", '/logout', method: 'delete' %>
+<% @user.posts.each do |post| %>
+  <% post_count = post_count + 1 %>
+  <% post_vote = post_vote + post.net_votes %>
 <%end%>
+
+<% @user.comments.each do |comment| %>
+  <% comment_vote = comment_vote + comment.net_votes %>
+  <% comment_count = comment_count + 1 %>
+<%end%>
+
+<%= post_count %> Posts made, with <%= post_vote %> total upvotes </br>
+<%= comment_count %> Comments made <%= comment_vote %> total upvotes</br>
+

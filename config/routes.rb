@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
     end
   end
-  resources :users, except: [:new, :create]
+  resources :users, except: [:new, :create, :index, :edit]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy'
   get '/signup' => 'users#new'
   post '/signup' => 'users#create'
+  get '/all' => 'posts#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
