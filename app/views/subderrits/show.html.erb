@@ -18,17 +18,19 @@ Moderators:
 <%=post.title%></br>
 <%=post.body%></br>
 <% vote = Pvote.where(post_id: post.id, user_id: current_user.id).first%>
-<% if vote %>
-  <% if vote.value == 1 %>
-    <%= button_to 'DELETE Upvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
-    <%= button_to 'CHANGE TO Downvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
-  <% elsif vote.value == -1 %>
-    <%= button_to 'CHANGE TOUpvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
-    <%= button_to 'DELETE Downvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
+<% if post.user_id != current_user.id %>
+  <% if vote %>
+    <% if vote.value == 1 %>
+      <%= button_to 'DELETE Upvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
+      <%= button_to 'CHANGE TO Downvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
+    <% elsif vote.value == -1 %>
+      <%= button_to 'CHANGE TOUpvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
+      <%= button_to 'DELETE Downvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
+    <% end %>
+  <% else %>
+    <%= button_to 'Upvote', subderrit_post_upvote_path(subderrit_id: params[:id], post_id: post.id)%>
+    <%= button_to 'Downvote', subderrit_post_downvote_path(subderrit_id: params[:id], post_id: post.id)%>
   <% end %>
-<% else %>
-  <%= button_to 'Upvote', subderrit_post_upvote_path(subderrit_id: params[:id], post_id: post.id)%>
-  <%= button_to 'Downvote', subderrit_post_downvote_path(subderrit_id: params[:id], post_id: post.id)%>
 <% end %>
 
 <%val = 0%>
