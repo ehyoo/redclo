@@ -22,6 +22,7 @@
 
 
         <% if logged_in? %>
+          <li><%= link_to current_user.username, "/users/#{current_user.id}" %></li>
           <li><%= link_to "Log out", '/logout', method: 'delete' %></li>
         <% else %>
           <li><a href="/login">Log In</a></li>

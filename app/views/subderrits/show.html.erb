@@ -14,33 +14,33 @@ Moderators:</br>
 
 <h3>Posts:</h3>
 <% @subderrit.posts.order(net_votes: :desc).each do |post|%>
-<p>
+  <p>
 
-<%= post.net_votes%>
-<%=link_to "#{post.title}", subderrit_post_path(subderrit_id: params[:id], id: post.id)%>
-by:
-<%= post.user.username %>
-<% vote = Pvote.where(post_id: post.id, user_id: current_user.id).first%>
-<% if post.user_id != current_user.id %>
-  <% if vote %>
-    <% if vote.value == 1 %>
-      <%= button_to 'Upvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
-      <%= button_to 'Downvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
-    <% elsif vote.value == -1 %>
-      <%= button_to 'Upvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
-      <%= button_to 'Downvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
+  <%= post.net_votes%>
+  <%=link_to "#{post.title}", subderrit_post_path(subderrit_id: params[:id], id: post.id)%>
+  by:
+  <%= link_to post.user.username, user_path(post.user.id)%>
+  <% vote = Pvote.where(post_id: post.id, user_id: current_user.id).first%>
+  <% if post.user_id != current_user.id %>
+    <% if vote %>
+      <% if vote.value == 1 %>
+        <%= button_to 'Upvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
+        <%= button_to 'Downvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
+      <% elsif vote.value == -1 %>
+        <%= button_to 'Upvote', "/subderrits/#{params[:id]}/posts/#{post.id}/vote", method: :put%>
+        <%= button_to 'Downvote', subderrit_post_vote_path(subderrit_id: params[:id], post_id: post.id), method: :delete%>
+      <% end %>
+    <% else %>
+      <%= button_to 'Upvote', subderrit_post_upvote_path(subderrit_id: params[:id], post_id: post.id)%>
+      <%= button_to 'Downvote', subderrit_post_downvote_path(subderrit_id: params[:id], post_id: post.id)%>
     <% end %>
-  <% else %>
-    <%= button_to 'Upvote', subderrit_post_upvote_path(subderrit_id: params[:id], post_id: post.id)%>
-    <%= button_to 'Downvote', subderrit_post_downvote_path(subderrit_id: params[:id], post_id: post.id)%>
   <% end %>
-<% end %>
 
-<% if is_moderator || post.user == current_user %>
-  <%= button_to 'Delete Post', "/subderrits/#{params[:id]}/posts/#{post.id}", method: :delete %>
-<% end %>
+  <% if is_moderator || post.user == current_user %>
+    <%= button_to 'Delete Post', "/subderrits/#{params[:id]}/posts/#{post.id}", method: :delete %>
+  <% end %>
 
-</p>
+  </p>
 <%end%>
 
 
