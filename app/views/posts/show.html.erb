@@ -10,6 +10,13 @@
   <%= @post.body %>
 </p>
 
+
+Make a comment:
 <p>
 <%= render 'comment_form' %>
 </p>
+
+<% @post.comments.each do |comment| %>
+  </br><%= comment.user.username %>
+  </br><%= comment.body %></br>
+<%end%> 

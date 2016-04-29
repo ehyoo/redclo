@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     @comment.save
-    redirect_to Post.find(comment_params[:post_id])
+    redirect_to subderrit_post_path(:subderrit_id => params[:subderrit_id], :id => params[:post_id])
   end
 
   # PATCH/PUT /comments/1
